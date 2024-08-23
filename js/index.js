@@ -12,3 +12,13 @@ document.addEventListener("DOMContentLoaded", function(){
         window.location = "products.html"
     });
 });
+function verificarLoginYMostarAlerta(){
+    var usuarioAuntenticado = localStorage.getItem("usuarioAutenticado");
+    if(usuarioAuntenticado !== "true"){
+        alert("No has iniciado sesión!!");
+        window.location.href = "login.html";
+    }
+}
+window.onload = function(){
+    verificarLoginYMostarAlerta();
+}
