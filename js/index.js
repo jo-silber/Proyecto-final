@@ -13,8 +13,8 @@ document.addEventListener("DOMContentLoaded", function(){
     });
 });
 function verificarLoginYMostarAlerta(){
-    var usuarioAuntenticado = localStorage.getItem("usuarioAutenticado");
-    if(usuarioAuntenticado !== "true"){
+    var usuarioAutenticado = localStorage.getItem("usuarioAutenticado");
+    if(usuarioAutenticado !== "true"){
         alert("No has iniciado sesión!!");
         window.location.href = "login.html";
     }
