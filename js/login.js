@@ -18,6 +18,6 @@ document
       window.location.href = "index.html";
     }
   });
-function iniciarSesion(){
-    localStorage.setItem("usuarioAuntenticado", "true")
+function iniciarSesion() {
+  localStorage.setItem("usuarioAutenticado", "true");
 }
