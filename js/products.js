@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function (e) {
+document.addEventListener("DOMContentLoaded", function (e) {
 
     let categoryId = 101;
     let urlWithCategory = PRODUCTS_URL + categoryId + EXT_TYPE; // declaramos estas variables ya que el URL esta incompleto, y hay que llenarlo con la categoria que necesitamos.
@@ -64,6 +64,7 @@ document.getElementById('limpiarFiltro').addEventListener('click', () =>{
     document.getElementById('precioMin').value = "";
     document.getElementById('precioMax').value = "";
     showProductsList(productsArray); //vuelve a mostrar todos los productos sin el filtro aplicado
+
 });
 
 
@@ -73,11 +74,10 @@ document.getElementById('limpiarFiltro').addEventListener('click', () =>{
 
 
 function showProductsList(array) {
-    let htmlContentToAppend = "";
-    for (let products of array) {
-
-        htmlContentToAppend += `
-         <div class="col-md-4">
+  let htmlContentToAppend = "";
+  for (let products of array) {
+    htmlContentToAppend += `
+         <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4">
                 <div class="card mb-4 shadow-sm">
                     <img src="${products.image}" class="bd-placeholder-img card-img-top" alt="${products.name}">
                     <div class="card-body">
@@ -90,8 +90,8 @@ function showProductsList(array) {
                     </div>
                 </div>
             </div>`;
-        container.innerHTML = htmlContentToAppend;
-    }
+    container.innerHTML = htmlContentToAppend;
+  }
 }
 
 
