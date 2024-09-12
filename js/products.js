@@ -37,13 +37,6 @@ document.getElementById('filtrarPrecio').addEventListener('click', () =>{
 
 })
 
-//boton que limpia el filtro
-document.getElementById('limpiarFiltro').addEventListener('click', () =>{
-    document.getElementById('precioMin').value = "";
-    document.getElementById('precioMax').value = "";
-    showProductsList(productsArray); //vuelve a mostrar todos los productos sin el filtro aplicado
-});
-
 //ordenar por precio ascendente
 document.getElementById('filtrarPrecioAsc').addEventListener('click', ()=>{
     let filtrarProductos = [...productsArray].sort((a, b) => a.cost - b.cost);
@@ -66,6 +59,13 @@ document.getElementById('filtrarPorRelevancia').addEventListener('click', ()=>{
     showProductsList(filtrarProductos);
     
 })
+
+//boton que limpia el filtro
+document.getElementById('limpiarFiltro').addEventListener('click', () =>{
+    document.getElementById('precioMin').value = "";
+    document.getElementById('precioMax').value = "";
+    showProductsList(productsArray); //vuelve a mostrar todos los productos sin el filtro aplicado
+});
 
 
 } else { console.log("Error de productos"); }
