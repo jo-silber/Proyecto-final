@@ -3,16 +3,74 @@ document.addEventListener('DOMContentLoaded', function (e) {
     let categoryId = 101;
     let urlWithCategory = PRODUCTS_URL + categoryId + EXT_TYPE; // declaramos estas variables ya que el URL esta incompleto, y hay que llenarlo con la categoria que necesitamos.
 
+    let productsArray = [];
 
     getJSONData(urlWithCategory).then(function (resultObj) {
         if (resultObj.status === "ok") {
-            let productsArray = resultObj.data.products;
+            productsArray = resultObj.data.products;
             console.log(productsArray);
             showProductsList(productsArray);
-        } else { console.log("Error de productos"); }
+        
+        /* === FILTROS === */
+/* por precio */
+document.getElementById('filtrarPrecio').addEventListener('click', () =>{
+    let precioMin = parseFloat(document.getElementById('precioMin').value);
+    let precioMax = parseFloat(document.getElementById('precioMax').value);
+
+    let productosFiltrados = productsArray.filter(product => {
+        // verifico si lo que esta ingresando es un numero
+    let precioMinEsValido = true;
+    if(!isNaN(precioMin)){
+       precioMinEsValido = product.cost >= precioMin;
+    }
+
+    let precioMaxEsValido = true;
+    if(!isNaN(precioMax)){
+        precioMaxEsValido = product.cost <= precioMax;
+    }
+
+    //devuelve true si cumple con ambos filtros
+    return precioMinEsValido && precioMaxEsValido;
+    });
+
+    showProductsList(productosFiltrados);
+
+})
+
+//ordenar por precio ascendente
+document.getElementById('filtrarPrecioAsc').addEventListener('click', ()=>{
+    let filtrarProductos = [...productsArray].sort((a, b) => a.cost - b.cost);
+    console.log(filtrarProductos);
+    
+    showProductsList(filtrarProductos)
+})
+
+//ordenar por precio descendiente
+document.getElementById('filtrarPrecioDesc').addEventListener('click', () =>{
+    let filtrarProductos = [...productsArray].sort((a, b) => b.cost - a.cost);
+    console.log(filtrarProductos);
+    showProductsList(filtrarProductos);
+})
+
+//filtrar por relevancia
+document.getElementById('filtrarPorRelevancia').addEventListener('click', ()=>{
+    let filtrarProductos = [...productsArray].sort((a, b) => b.soldCount - a.soldCount);
+    console.log(filtrarProductos);
+    showProductsList(filtrarProductos);
+    
+})
+//boton que limpia el filtro
+document.getElementById('limpiarFiltro').addEventListener('click', () =>{
+    document.getElementById('precioMin').value = "";
+    document.getElementById('precioMax').value = "";
+    showProductsList(productsArray); //vuelve a mostrar todos los productos sin el filtro aplicado
+});
+
+
+} else { console.log("Error de productos"); }
 
     });
-});
+
 
 function showProductsList(array) {
     let htmlContentToAppend = "";
@@ -35,3 +93,7 @@ function showProductsList(array) {
         container.innerHTML = htmlContentToAppend;
     }
 }
+
+
+
+});
