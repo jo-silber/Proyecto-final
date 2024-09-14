@@ -67,6 +67,7 @@ document.getElementById('limpiarFiltro').addEventListener('click', () =>{
     showProductsList(productsArray); //vuelve a mostrar todos los productos sin el filtro aplicado
 });
 
+
 //buscar productos en tiempo real
             let searchInput = document.getElementById('searchInput');
             searchInput.addEventListener('input', function () {
