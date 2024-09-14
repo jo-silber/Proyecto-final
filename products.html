@@ -38,18 +38,51 @@
   </nav>
   <main class="pb-5 container">
 
+
     <div id="tablaDeProductos">
       <h4>PRODUCTOS</h4>
+      <input type="text" id="searchInput" placeholder="Buscador.." class="form-control mb-3">
+      <!-- ===== FILTRO DE PRODUCTOS POR ORDEN ===== -->
+
+      <div class="row mb-3" id="contenedorFiltroBotones">
+        <div class="col-md-12 d-flex justify-content-end" id="botonesFiltro">
+          <button class="btn btn-secondary" id="filtrarPrecioAsc">⬆Precio</button>
+          <button class="btn btn-secondary" id="filtrarPrecioDesc">⬇Precio</button>
+          <button class="btn btn-secondary" id="filtrarPorRelevancia">Relevancia</button>
+        </div>
+      </div>
+
+      <!-- ===== FILTROS DE PRODUCTOS POR PRECIO===== -->
+
+      <div class="row mb-3 justify-content-end" id="contenedorFiltroPrecio">
+        <div class="col-auto">
+          <label class="nombreFiltro text-muted">Precio</label>
+        </div>
+        <div class="col-auto">
+          <input type="number" id="precioMin" class="form-control" placeholder="min.">
+        </div>
+        <div class="col-auto">
+          <input type="number" id="precioMax" class="form-control" placeholder="max.">
+        </div>
+        <div class="col-auto align-self-end">
+          <button class="btn btn-primary" id="filtrarPrecio">Filtrar</button>
+        </div>
+        <div class="col-auto align-self-end">
+          <button class="btn btn-secondary" id="limpiarFiltro">Limpiar filtros</button>
+        </div>
+      </div>
+
       <div class="album py-5 bg-light">
         <div class="container">
+         
           <div class="row" id="container">
-            <!-- aca ban los productos -->
+            <!-- aca van los productos -->
           </div>
         </div>
       </div>
     </div>
     <div class="container">
-      
+
     </div>
   </main>
   <footer class="text-muted">
@@ -57,7 +90,8 @@
       <p class="float-end">
         <a href="#">Volver arriba</a>
       </p>
-      <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a></p>
+      <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a>
+      </p>
     </div>
   </footer>
   <div id="spinner-wrapper">
