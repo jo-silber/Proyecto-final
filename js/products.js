@@ -1,37 +1,51 @@
-document.addEventListener('DOMContentLoaded', function (e) {
-
-    let categoryId = 101;
-    let urlWithCategory = PRODUCTS_URL + categoryId + EXT_TYPE; // declaramos estas variables ya que el URL esta incompleto, y hay que llenarlo con la categoria que necesitamos.
-
-
-    getJSONData(urlWithCategory).then(function (resultObj) {
-        if (resultObj.status === "ok") {
-            let productsArray = resultObj.data.products;
-            console.log(productsArray);
-            showProductsList(productsArray);
-        } else { console.log("Error de productos"); }
-
-    });
-});
-
-function showProductsList(array) {
+document.addEventListener("DOMContentLoaded", function(e){
+    let catID = localStorage.getItem("catID");
+  
+    if (catID) {
+        let productsURL = `https://japceibal.github.io/emercado-api/products/${catID}.json`;
+  
+        getJSONData(productsURL).then(function(resultObj){
+            if (resultObj.status === "ok"){
+                let productsArray = resultObj.data;
+                showProductsList(productsArray);
+            }
+        });
+    } else {
+        console.error("No se encontró ningún catID en el almacenamiento local.");
+    }
+  });
+  
+  function getJSONData(url) {
+    return fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            return { status: "ok", data: data };
+        })
+        .catch(error => {
+            console.error('Error al obtener los datos:', error);
+            return { status: "error", data: error };
+        });
+  }
+  
+  function showProductsList(productsArray) {
     let htmlContentToAppend = "";
-    for (let products of array) {
-
+  
+    for (let i = 0; i < productsArray.length; i++) {
+        let product = productsArray[i];
+  
         htmlContentToAppend += `
-         <div class="col-md-4">
+            <div class="col-md-4">
                 <div class="card mb-4 shadow-sm">
-                    <img src="${products.image}" class="bd-placeholder-img card-img-top" alt="${products.name}">
+                    <img src="${product.imgSrc}" alt="${product.description}" class="img-thumbnail">
                     <div class="card-body">
-                        <h5 class="card-title">${products.name}</h5>
-                        <p class="card-text">${products.description}</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <small class="text-muted">${products.currency} ${products.cost}</small>
-                            <small class="text-muted">Vendidos: ${products.soldCount}</small>
-                        </div>
+                        <h5 class="card-title">${product.name}</h5>
+                        <p class="card-text">${product.description}</p>
+                        <p class="text-muted">${product.cost} ${product.currency}</p>
                     </div>
                 </div>
-            </div>`;
-        container.innerHTML = htmlContentToAppend;
+            </div>
+        `;
     }
-}
+  
+    document.getElementById("container").innerHTML = htmlContentToAppend;
+  }
