@@ -68,6 +68,16 @@ document.getElementById('limpiarFiltro').addEventListener('click', () =>{
 });
 
 
+//buscar productos en tiempo real
+            let searchInput = document.getElementById('searchInput');
+            searchInput.addEventListener('input', function () {
+                let searchTerm = searchInput.value.toLowerCase();
+                let productosFiltrados = productsArray.filter(product => {
+                    return product.name.toLowerCase().includes(searchTerm) ;
+                });
+                showProductsList(productosFiltrados);
+            });
+
 } else { console.log("Error de productos"); }
 
     });
