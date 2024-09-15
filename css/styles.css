@@ -188,3 +188,54 @@ a.custom-card:hover {
 .checked {
   color: orange;
 }
+
+/* === CSS DE PRODUCTS === */
+.form-control{
+  width: 100px;
+}
+
+#contenedorFiltroBotones{
+  justify-content: right;
+}
+
+#contenedorFiltroPrecio .col-auto{
+  margin-right: 0;
+}
+
+.nombreFiltro{
+ padding-top: 6px;
+}
+
+#filtrarPrecio{
+  font-size: small;
+  margin-bottom: 2px;
+}
+
+#limpiarFiltro{
+  font-size: small;
+  margin-bottom: 2px;
+}
+
+#botonesFiltro{
+  gap: 5px;
+}
+
+#filtrarPrecioAsc{
+  font-size: small;
+}
+
+#filtrarPrecioDesc{
+  font-size: small;
+}
+
+#filtrarPorRelevancia{
+  font-size: small;
+}
+
+#precioMax {
+  font-size: small;
+}
+
+#precioMin {
+  font-size: small;
+}
