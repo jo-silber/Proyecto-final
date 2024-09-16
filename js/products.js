@@ -70,6 +70,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
                     document.getElementById('precioMax').value = "";
                     showProductsList(productsArray); //vuelve a mostrar todos los productos sin el filtro aplicado
                 });
+                
                 //buscar productos en tiempo real
                 let searchInput = document.getElementById('searchInput');
                 searchInput.addEventListener('input', function () {
@@ -96,41 +97,6 @@ document.addEventListener("DOMContentLoaded", function (e) {
                 });
         }
 
-        function showProductsList(productsArray) {
-            console.log(productsArray);
-
-            let htmlContentToAppend = "";
-            console.log(htmlContentToAppend);
-
-            for (let i = 0; i < productsArray.length; i++) {
-                let product = productsArray[i];
-
-
-                htmlContentToAppend += `
-            <div class="col-md-4">
-=======
-//boton que limpia el filtro
-document.getElementById('limpiarFiltro').addEventListener('click', () =>{
-    document.getElementById('precioMin').value = "";
-    document.getElementById('precioMax').value = "";
-    showProductsList(productsArray); //vuelve a mostrar todos los productos sin el filtro aplicado
-});
-
-
-//buscar productos en tiempo real
-            let searchInput = document.getElementById('searchInput');
-            searchInput.addEventListener('input', function () {
-                let searchTerm = searchInput.value.toLowerCase();
-                let productosFiltrados = productsArray.filter(product => {
-                    return product.name.toLowerCase().includes(searchTerm) ;
-                });
-                showProductsList(productosFiltrados);
-            });
-
-} else { console.log("Error de productos"); }
-
-    });
-
 
 function showProductsList(array) {
     let htmlContentToAppend = "";
@@ -138,13 +104,12 @@ function showProductsList(array) {
 
         htmlContentToAppend += `
          <div class="col-md-4">
-
                 <div class="card mb-4 shadow-sm">
-                    <img src="${product.image}" alt="${product.description}" class="img-thumbnail">
+                    <img src="${products.image}" alt="${products.description}" class="img-thumbnail">
                     <div class="card-body">
-                        <h5 class="card-title">${product.name}</h5>
-                        <p class="card-text">${product.description}</p>
-                        <p class="text-muted">${product.cost} ${product.currency}</p>
+                        <h5 class="card-title">${products.name}</h5>
+                        <p class="card-text">${products.description}</p>
+                        <p class="text-muted">${products.cost} ${products.currency}</p>
                     </div>
                 </div>
             </div>

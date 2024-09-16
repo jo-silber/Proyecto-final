@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function (e){
-    let productID = localStorage.getItem("catID");
+    let productID = "50742";
     let productsArray = [];
 
     let url =  PRODUCT_INFO_URL + productID + EXT_TYPE //url para obetener la informacion del producto
@@ -14,25 +14,25 @@ document.addEventListener('DOMContentLoaded', function (e){
         }
 
         function showInfoProducto(productsArray){
-            console.log(productsArray);
-
             let htmlContentToAppend = "";
-            
-            for(let i = 0; i < productsArray.length; i++){
-                let product = productsArray[i];
-
+            for (let products of productsArray) {
+        
                 htmlContentToAppend += `
-                <p><strong>Categoria:</strong> ${product.category}</p> 
-            <div class="col-md-6">
-                <h1>${product.name}</h1>
-                <p> <strong id="sold-count"> ${product.soldCount} Vendidos </strong> </p>
-                <p><strong id="product-price">${product.currency} ${product.cost}</strong> </p>
-                <p> ${product.description}</p>
-            </div>`;
-            }
-
-            document.getElementById('product-info').innerHTML = htmlContentToAppend;
-            
-        }
-    })
-})
+                 <div class="col-md-4">
+                        <div class="card mb-4 shadow-sm">
+                            <img src="${products.image}" alt="${products.description}" class="img-thumbnail">
+                            <div class="card-body">
+                                <h5 class="card-title">${products.name}</h5>
+                                <p class="card-text">${products.description}</p>
+                                <p class="text-muted">${products.cost} ${products.currency}</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                    }
+        
+                    document.getElementById("container").innerHTML = htmlContentToAppend;
+                }
+            })
+        
+}); 
