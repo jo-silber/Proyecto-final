@@ -79,6 +79,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
                     });
                     showProductsList(productosFiltrados);
                 });
+
             } else {
                 console.error("No se encontró ningún catID en el almacenamiento local.");
             }
