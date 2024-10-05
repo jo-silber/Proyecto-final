@@ -249,3 +249,7 @@ a.custom-card:hover {
   margin-bottom: 50px;
   font-weight:bolder;
 }
+
+#textArea {
+  width: 100%; 
+}
