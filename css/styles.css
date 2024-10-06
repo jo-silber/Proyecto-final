@@ -253,3 +253,49 @@ a.custom-card:hover {
 #textArea {
   width: 100%; 
 }
+
+#star-rating{
+  /* color: gold; */
+  color: #ffc107;
+  cursor: pointer;
+}
+
+/* caja de comentarios */
+.card {
+  border-radius: 15px;
+  border: none;
+}
+.form-control {
+  border-radius: 10px;
+  transition: border-color 0.3s ease;
+}
+.form-control:focus {
+  border-color: #80bdff;
+  box-shadow: none;
+}
+
+/* boton */
+.btn-success {
+  border-radius: 50px;
+  padding: 10px 30px;
+}
+
+/* comentarios */
+.comentarios .card {
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.comentarios .card-body {
+  padding: 20px;
+}
+.comentarios .card-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+.comentarios .card-text {
+  font-size: 12px;
+}
+.comentarios .col-md-4 {
+  margin-bottom: 30px;
+}
+

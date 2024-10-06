@@ -78,6 +78,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
     }
   });
 
+  /* comentarios */
   getJSONData(urlComentarios).then(function (resultObj) {
     if (resultObj.status === "ok") {
       comments = resultObj.data;
@@ -89,41 +90,109 @@ document.addEventListener("DOMContentLoaded", function (e) {
       );
     }
 
-    function showComments(comments) {
-      console.log(comments);
+  });
 
-      let htmlCommentsToAppend = `
-      <div class="album py-5 bg-light">
-      <div class="container">
-      <div class="row">`;
+  function showComments(comments) {
+    console.log(comments);
 
-      //hay que hacerlo en partes separadas ya que el for crea una linea nueva cada vez que se lee, de esta manera solo se crea la tarjeta
-      for (let i = 0; i < comments.length; i++) {
-        let comment = comments[i];
-        htmlCommentsToAppend += `
-        <div class="col-md-4">
-        <div class="card mb-4 box-shadow">
-        <div class="card-body">
-        <img class="rounded-circle shadow-1-strong me-3"
-                src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(21).webp" alt="avatar" width="65"
-                height="65" />
-        <h5 class="card-title">${comment.user}</h5>
-        <p class="card-text">${comment.description}</p>
-        <p class="card-text text-muted">${comment.dateTime}</p>
-        <p>${comment.score}</p>
-        </div>
-        </div>
-        </div>`;
-      }
+    let htmlCommentsToAppend = `
+    <div class="album py-5 bg-light">
+    <div class="container">
+    <div class="row">`;
+
+    //hay que hacerlo en partes separadas ya que el for crea una linea nueva cada vez que se lee, de esta manera solo se crea la tarjeta
+    for (let i = 0; i < comments.length; i++) {
+      let comment = comments[i];
       htmlCommentsToAppend += `
-      </div> 
+      <div class="col-md-4">
+      <div class="card mb-4 box-shadow">
+      <div class="card-body">
+      <div class="d-flex align-items-center">
+      <img class="rounded-circle shadow-1-strong me-3"
+              src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(21).webp" alt="avatar" width="45"
+              height="45" />
+      <h5 class="card-title">${comment.user}</h5>
+      </div>
+      <p class="card-text">${comment.description}</p>
+      <p class="card-text text-muted">${comment.dateTime}</p>`
+
+
+      for (let i = 0; i < 5; i++) {
+      if ((i + 1) <= comment.score) {
+        htmlCommentsToAppend += `<i class="fas fa-star" style="color: gold"></i>`; //llena
+      } else {
+        htmlCommentsToAppend += `<i class="far fa-star" style="color: gold"></i>`; //vacía
+      }
+    }
+      htmlCommentsToAppend+=`</div>
+      </div>
+      </div>`; 
+    }
+    htmlCommentsToAppend += `
     </div> 
   </div> 
+</div> 
 `;
-      console.log(htmlCommentsToAppend);
+    console.log(htmlCommentsToAppend);
 
-      document.getElementById("comentariosID").innerHTML = htmlCommentsToAppend;
+    document.getElementById("comentariosID").innerHTML = htmlCommentsToAppend;
 
+  }
+
+  /* Controlar las estrellas de caja de comentarios */
+  let estrellas = document.querySelectorAll("#star-rating i")
+  estrellas.forEach((estrella, index)=>{
+    estrella.addEventListener('click', ()=>{
+      estrellas.forEach((e, i) =>{
+        if(i <= index){
+          e.classList.replace('far', 'fas');
+        } else {
+          e.classList.replace('fas', 'far');
+        }
+      })
+    })
+  })
+
+  /* crear un comenario nuevo */
+  document.querySelector('.btn-success').addEventListener('click', ()=>{
+    
+    let texto = document.getElementById('textArea').value;
+    let estrellas = document.querySelectorAll('#star-rating i');
+    let fecha = new Date().toLocaleString();
+    let producto = localStorage.getItem("productID");
+
+    /* contar cuantas estrellas se seleccionaron */
+
+    let estrellasSeleccionadas = 0;
+    estrellas.forEach(estrella =>{
+      if(estrella.classList.contains('fas')){
+        estrellasSeleccionadas++;
+      }
+    })
+
+    if(texto && estrellasSeleccionadas > 0) {
+      let nuevoComentario = {
+        user: "UsuarioActual",
+        description: texto,
+        score: estrellasSeleccionadas,
+        dateTime: fecha,
+        product: producto
+      };
+      console.log(nuevoComentario);
+      
+      
+    comments.push(nuevoComentario);
+    
+    showComments(comments);
+
+    // Limpiar el textarea y las estrellas
+    document.getElementById('textArea').value = '';
+    estrellas.forEach(estrella => estrella.classList.replace('fas', 'far'));
+    } else {
+      alert("Por favor, complete todos los campos")
     }
-  });
+    showComments(comments)
+  })
+
+
 });
